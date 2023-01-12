@@ -1,7 +1,7 @@
 pipeline {
   agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:6-alpine' 
             args '-p 3000:3000' 
         }
     }
@@ -12,17 +12,23 @@ pipeline {
       }
     }
 
-    stage('Test') {
+    stage('Install Packages') {
       steps {
-        echo 'Done :)))'
+        sh 'npm install'
       }
     }
 
-    stage('Build') { 
+    stage('Test') { 
             steps {
-                sh 'npm install' 
+                sh 'npm test' 
             }
         }
+
+    stage("Build") {
+      steps {
+        sh 'socker build -t reactapp'
+      }
+    }
 
   }
 }
