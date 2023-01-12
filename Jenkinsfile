@@ -1,10 +1,10 @@
 pipeline {
   agent {
-        docker {
-            image 'node:6-alpine' 
-            args '-p 3000:3000' 
-        }
+    dockerfile {
+      filename 'Dockerfile'
     }
+
+  }
   stages {
     stage('Clone') {
       steps {
@@ -18,13 +18,13 @@ pipeline {
       }
     }
 
-    stage('Test') { 
-            steps {
-                sh 'npm test' 
-            }
-        }
+    stage('Test') {
+      steps {
+        sh 'npm test'
+      }
+    }
 
-    stage("Build") {
+    stage('Build') {
       steps {
         sh 'socker build -t reactapp'
       }
