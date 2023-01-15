@@ -6,11 +6,10 @@ pipeline {
         }
     }
 
-  }
   stages {
     stage('Clone') {
       steps {
-        git 'https://github.com/20127090/jenkins-docker-reactjs-testv2'
+        git 'https://github.com/20127090/jenkins-docker-reactjs-testv2.git'
       }
     }
 
@@ -36,6 +35,7 @@ pipeline {
     }
 
   }
+}
 // agent {
 //   docker {
 //       image 'node:lts-bullseye-slim' 
