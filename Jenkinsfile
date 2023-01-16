@@ -26,11 +26,12 @@ pipeline {
         }
 
         stage('Build') {
+            agent { dockerfile true }
             steps {
-                withDockerContainer(image: 'reactapp', toolName: 'Docker') {
+                // withDockerContainer(image: 'reactapp', toolName: 'Docker') {
                     sh 'docker build -t reactapp .'
                     sh 'docker push reactapp .'
-                }
+                // }
             }
         }
     }
