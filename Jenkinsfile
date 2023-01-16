@@ -27,7 +27,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                withDockerContainer('reactapp') {
+                withDockerContainer(image: 'reactapp', toolName: 'Docker') {
                     sh 'docker build -t reactapp .'
                     sh 'docker push reactapp .'
                 }
