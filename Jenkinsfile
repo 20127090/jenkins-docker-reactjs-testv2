@@ -27,7 +27,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                withDockerRegistry(credentialsId: 'docker', url:'https://hub.docker.com/') {
+                withDockerContainer('reactapp') {
                     sh 'docker build -t reactapp .'
                     sh 'docker push reactapp .'
                 }
