@@ -12,22 +12,20 @@ pipeline {
                 sh 'npm install' 
             }
         }
-    }
 
-    stages {
         stage('Test') { 
             steps {
                 sh 'npm test' 
             }
         }
-    }
 
-    stage('Build') {
-      steps {
-        withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
-          sh 'docker build -t reactapp .'
-          sh 'docker push reactapp .'
+        stage('Build') {
+            steps {
+                withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
+                sh 'docker build -t reactapp .'
+                sh 'docker push reactapp .'
+                }
+            }
         }
-      }
     }
 }
