@@ -10,7 +10,6 @@ pipeline {
         stage('Clone') {
             steps {
                 git credentialsId: 'Git', url: 'https://github.com/20127090/jenkins-docker-reactjs-testv2.git'
-                sh "ls"
             }
         }
 
@@ -29,8 +28,8 @@ pipeline {
         stage('Build') {
             steps {
                 withDockerRegistry(credentialsId: 'docker') {
-                sh 'docker build -t reactapp .'
-                sh 'docker push reactapp .'
+                    sh 'docker build -t reactapp .'
+                    sh 'docker push reactapp .'
                 }
             }
         }
