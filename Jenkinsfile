@@ -44,11 +44,29 @@ pipeline {
             args '-p 3000:3000'
         }
     }
+
     stages {
-        stage('Build') { 
+        stage('Install packages') { 
             steps {
                 sh 'npm install' 
             }
         }
+    }
+
+    stages {
+        stage('Test') { 
+            steps {
+                sh 'npm test' 
+            }
+        }
+    }
+
+    stage('Build') {
+      steps {
+        withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
+          sh 'docker build -t reactapp .'
+          sh 'docker push reactapp .'
+        }
+      }
     }
 }
