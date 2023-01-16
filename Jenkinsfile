@@ -32,7 +32,8 @@ pipeline {
                 //     sh 'docker build -t reactapp .'
                 //     sh 'docker push reactapp .'
                 // }
-                sh "ls"
+                sh "docker build -t reactapp ."
+                sh 'docker push reactapp .'
             }
         }
     }
