@@ -7,6 +7,13 @@ pipeline {
     }
 
     stages {
+        stage('Clone') {
+            steps {
+                git credentialsId: 'Git', url: 'https://github.com/20127090/jenkins-docker-reactjs-testv2.git'
+                sh "cd jenkins-docker-reactjs-testv2"
+            }
+        }
+
         stage('Install packages') { 
             steps {
                 sh 'npm install' 
