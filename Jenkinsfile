@@ -27,11 +27,12 @@ pipeline {
 
         stage('Build') {
             steps {
-                withDockerRegistry(credentialsId: 'docker', url:'') {
-                    sh "ls"
-                    sh 'docker build -t reactapp .'
-                    sh 'docker push reactapp .'
-                }
+                // withDockerRegistry(credentialsId: 'docker', url:'') {
+                //     sh "ls"
+                //     sh 'docker build -t reactapp .'
+                //     sh 'docker push reactapp .'
+                // }
+                sh "ls"
             }
         }
     }
