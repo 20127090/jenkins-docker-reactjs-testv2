@@ -20,10 +20,11 @@ pipeline {
 
         stage('Build') {
             steps {
-                withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v10/') {
-                    sh 'docker build -t 20127090/reactapp .'
-                    sh 'docker push 20127090/reactapp:latest'
-                }
+                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        //             sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+        //             sh 'docker build -t 20127090/reactapp .'
+        //             sh 'docker push 20127090/reactapp:latest'
+        //         }
             }
         }
 
