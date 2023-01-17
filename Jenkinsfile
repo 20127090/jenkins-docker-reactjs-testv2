@@ -36,7 +36,9 @@ pipeline {
                 // withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
                     
                 // }
-                docker.build registry
+                script {
+                    docker.build registry
+                }
             }
         }
     }
