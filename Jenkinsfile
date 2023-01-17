@@ -36,6 +36,11 @@ pipeline {
                 
         //     }
         // }
+        stage("Echo") {
+            steps {
+                sh "ls"
+            }
+        }
 
         stage('Build') {
             agent { dockerfile true }

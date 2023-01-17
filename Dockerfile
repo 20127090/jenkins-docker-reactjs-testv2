@@ -1,5 +1,6 @@
 FROM node
-WORKDIR /build
+RUN MKDIR -p /app
+WORKDIR /app
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
