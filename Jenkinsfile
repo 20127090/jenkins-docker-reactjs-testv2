@@ -30,14 +30,22 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            agent { dockerfile true }
+        stage("Build") {
+            agent any
             steps {
-                withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
-                    def myImage = docker.build registry
-                    myImage.push()
-                }
+                sh 'docker build -t 20127090/reactapp .'
             }
         }
+
+        // stage('Build') {
+        //     agent { dockerfile true }
+        //     steps {
+        //         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        //             sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+        //             sh "docker "
+        //             sh 'docker push shanem/spring-petclinic:latest'
+        //         }
+        //     }
+        // }
     }
 }
