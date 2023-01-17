@@ -18,17 +18,26 @@ pipeline {
             }
         }
 
-        stage('Install packages') { 
+        stage('Build') {
             steps {
-                sh 'npm install' 
+                withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v10/') {
+                    sh 'docker build -t 20127090/reactapp .'
+                    sh 'docker push 20127090/reactapp:latest'
+                }
             }
         }
 
-        stage('Test') { 
-            steps {
-                sh 'npm test' 
-            }
-        }
+        // stage('Install packages') { 
+        //     steps {
+        //         sh 'npm install' 
+        //     }
+        // }
+
+        // stage('Test') { 
+        //     steps {
+        //         sh 'npm test' 
+        //     }
+        // }
 
         // stage("Build") {
         //     agent { dockerfile true }
@@ -36,21 +45,16 @@ pipeline {
                 
         //     }
         // }
-        stage("Echo") {
-            steps {
-                sh "ls"
-            }
-        }
 
-        stage('Build') {
-            agent { dockerfile true }
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh 'docker build -t 20127090/reactapp .'
-                    sh 'docker push shanem/spring-petclinic:latest'
-                }
-            }
-        }
+        // stage('Build') {
+        //     agent { dockerfile true }
+        //     steps {
+        //         withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        //             sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+        //             sh 'docker build -t 20127090/reactapp .'
+        //             sh 'docker push 20127090/reactapp:latest'
+        //         }
+        //     }
+        // }
     }
 }
