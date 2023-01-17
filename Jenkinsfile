@@ -31,7 +31,7 @@ pipeline {
         }
 
         stage("Build") {
-            agent any
+            agent { dockerfile true }
             steps {
                 sh 'docker build -t 20127090/reactapp .'
             }
