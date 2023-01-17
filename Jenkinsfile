@@ -6,6 +6,11 @@ pipeline {
         }
     }
 
+    environment {
+        registry = "20127090/reactapp"
+        registryCredential = "docker"
+    }
+
     stages {
         stage('Clone') {
             steps {
@@ -28,10 +33,10 @@ pipeline {
         stage('Build') {
             agent { dockerfile true }
             steps {
-                // withDockerContainer(image: 'reactapp', toolName: 'Docker') {
-                    sh 'docker build -t reactapp .'
-                    sh 'docker push reactapp .'
+                // withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
+                    
                 // }
+                docker.build registry
             }
         }
     }
