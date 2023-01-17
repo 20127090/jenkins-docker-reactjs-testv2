@@ -33,11 +33,9 @@ pipeline {
         stage('Build') {
             agent { dockerfile true }
             steps {
-                // withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
-                    
-                // }
-                script {
-                    docker.build registry
+                withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
+                    def myImage = docker.build registry
+                    myImage.push()
                 }
             }
         }
