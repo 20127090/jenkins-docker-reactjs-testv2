@@ -19,6 +19,7 @@ pipeline {
         }
 
         stage('Build') {
+            agent { dockerfile true }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
