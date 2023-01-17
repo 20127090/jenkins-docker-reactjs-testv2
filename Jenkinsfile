@@ -40,10 +40,13 @@ pipeline {
         stage('Build') {
             agent { dockerfile true }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                // withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                //     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                //     sh 'docker build -t 20127090/reactapp .'
+                //     sh 'docker push shanem/spring-petclinic:latest'
+                // }
+                script {
                     sh 'docker build -t 20127090/reactapp .'
-                    sh 'docker push shanem/spring-petclinic:latest'
                 }
             }
         }
